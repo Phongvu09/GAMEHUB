@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchSteamGame } from '../../service/api.js';
 import GameCard from '../../components/GameCard';
-import './GameDetailStyles.css';
+import '../GameDetailPage/GameDetailStyles.css'
 
 function stripImageFromHTML(html) {
     return html.replace(/<img[^>]*>/g, '');
