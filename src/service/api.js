@@ -3,12 +3,15 @@ const STEAM_API_URL = "https://store.steampowered.com/api/appdetails";
 export async function fetchSteamGame(appId) {
     const cc = "us";
     const targetUrl = `${STEAM_API_URL}?appids=${appId}&cc=${cc}&l=en`;
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
 
     try {
-        const response = await fetch(proxyUrl);
-        const result = await response.json();
-        const data = JSON.parse(result.contents);
+        const response = await fetch(targetUrl);
+
+        if (!response.ok) {
+            throw new Error(`Steam API trả về lỗi: ${response.status}`);
+        }
+
+        const data = await response.json();
 
         if (!data[appId]?.success) {
             console.warn(`AppID ${appId} không hợp lệ hoặc không có dữ liệu.`);
@@ -17,10 +20,7 @@ export async function fetchSteamGame(appId) {
 
         return data[appId].data;
     } catch (error) {
-        console.error("Lỗi khi fetch dữ liệu qua proxy:", error);
+        console.error("❌ Lỗi khi fetch từ Steam API:", error.message || error);
         return null;
     }
 }
-
-
-
