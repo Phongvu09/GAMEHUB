@@ -1,0 +1,27 @@
+/* ProfilePage.css */
+.profile-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #1e1e2f;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile-container h2 {
+    margin-bottom: 1.5rem;
+    color: #00bfff;
+}
+
+.profile-container p {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.profile-loading {
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+}

@@ -1,0 +1,110 @@
+.game-detail-page {
+    padding: 40px;
+    background: #0f0f0f;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.detail-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #00bfff;
+}
+
+.detail-layout {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.detail-left {
+    flex: 2;
+}
+
+.detail-right {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #1b1b1b;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #00000060;
+}
+
+.detail-video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #00000060;
+}
+
+.btn-group {
+    margin-top: 15px;
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+}
+
+.btn.add {
+    background-color: #3e8ed0;
+    color: white;
+}
+
+.btn.buy {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.section {
+    margin-top: 40px;
+}
+
+.section h3 {
+    color: #00bfff;
+    margin-bottom: 12px;
+}
+
+.screenshots {
+    display: flex;
+    gap: 10px;
+}
+
+.screen.section .screenshots {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.section .game-card-wrapper {
+    width: 30%;
+    margin: 1%;
+}
+
+.screenshots img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 6px;
+    box-shadow: 0 0 8px #00000050;
+    transition: transform 0.2s ease;
+}
+
+.recommendations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 20px;
+}
