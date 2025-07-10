@@ -20,7 +20,7 @@ export default function LoginPage() {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const uid = userCredential.user.uid;
-            const userDoc = await getDoc(doc(db, 'users.email', uid));
+            const userDoc = await getDoc(doc(db, 'users', uid));
 
             if (!userDoc.exists()) {
                 alert('Tài khoản chưa được thiết lập đầy đủ. Vui lòng đăng ký.');
