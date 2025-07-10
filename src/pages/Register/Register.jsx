@@ -22,6 +22,7 @@ export function RegisterPage() {
         }
         if (repassword != password) {
             alert("Mật khẩu không khớp")
+            return;
         }
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
