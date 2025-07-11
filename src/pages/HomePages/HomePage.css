@@ -84,3 +84,37 @@
 .dot.active {
     background-color: #fff;
 }
+
+.category-section {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.category-item {
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #333;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-item:hover {
+    background-color: #00bfff;
+    color: black;
+}
+
+.see-more-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #00bfff;
+    text-decoration: underline;
+}

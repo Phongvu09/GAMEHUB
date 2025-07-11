@@ -33,7 +33,7 @@ export function RegisterPage() {
                 thanPhan
             });
             alert('Tạo tài khoản thành công!');
-            navigate('/login');
+            navigate('/');
         } catch (error) {
             alert('Đăng ký thất bại: ' + error.message);
         }

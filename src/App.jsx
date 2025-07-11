@@ -11,6 +11,7 @@ import GameDetailPage from './pages/GameDetailPage/GameDetailPage'
 import CartPage from './pages/CartPage/CartPage'
 import WrapppedCheckoutPage from './pages/CheckoutPage/CheckoutPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import CategoriesPage from './pages/CategoriesPage/CategoriesPage'
 
 
 function App() {
@@ -22,12 +23,14 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard/buyer" element={<DashboardBuyer />} />
         <Route path="/dashboard/publisher" element={<DashboardPublisher />} />
-        <Route path="/dashboard/admin" element={<AdminPanel />} />
+        <Route path="/dashaboard/admin" element={<AdminPanel />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/game/:id" element={<GameDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<WrapppedCheckoutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/category/:categoryName" element={<CategoriesPage />} />
+
 
       </Routes>
     </Router>

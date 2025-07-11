@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { fetchSteamGame } from '../../service/api.js';
 import GameCard from '../../components/GameCard.jsx';
 import { doc, getDoc } from 'firebase/firestore';
@@ -9,9 +10,8 @@ const titles = {
     best: 'Game hay nên chơi',
     cheap: 'Game rẻ dưới 15$',
     Hot: 'Game bán chạy',
-    New: 'Game nổi gần đây'
+    New: 'Game nổi gần đây',
 };
-
 
 const fetchAPIgames = async (categoriesName = ["best", "cheap", "Hot", "New"]) => {
     const docRef = doc(db, "gameLists", "categories");
@@ -29,39 +29,34 @@ const fetchAPIgames = async (categoriesName = ["best", "cheap", "Hot", "New"]) =
         const field = data[category];
 
         if (!field || typeof field[0] !== "string") {
-            console.warn(`⚠️ Field ${category} không tồn tại hoặc không đúng định dạng`, field);
+            console.warn(`⚠️ Field ${category} không tồn tại hoặc sai định dạng`, field);
             continue;
         }
 
         const ids = field[0]
             .split(",")
             .map(id => parseInt(id.trim()))
-            .filter(id => !isNaN(id));
-
-        const limitIDs = ids.slice(0, 9)
+            .filter(id => !isNaN(id))
+            .slice(0, 9);
 
         result[category] = {
             title: titles[category] || category,
-            ids: limitIDs
+            ids
         };
     }
 
-    console.log("✅ fetchAPIgames() result:", result);
     return result;
 };
 
-
-
 function HomePages() {
-
-    console.log("🏁 HomePages mounted");
-
     const [sections, setSections] = useState({});
-    const gamepage = 3
+    const [allCategoryKeys, setAllCategoryKeys] = useState([]);
+    const navigate = useNavigate();
+    const gamePerPage = 3;
 
     useEffect(() => {
-        async function loadGames() {
-            const apiGames = await fetchAPIgames(); // 🔁 Dữ liệu động từ Firestore
+        async function loadAll() {
+            const apiGames = await fetchAPIgames();
             const result = {};
 
             for (const key in apiGames) {
@@ -71,16 +66,11 @@ function HomePages() {
                 const responses = await Promise.allSettled(
                     ids.map(id =>
                         fetchSteamGame(id).catch(err => {
-                            console.error(`❌ fetchSteamGame(${id}) lỗi:`, err.message || err);
+                            console.error(`❌ fetchSteamGame(${id}) lỗi:`, err.message);
                             return null;
                         })
                     )
                 );
-
-                if (!Array.isArray(responses)) {
-                    console.error(`❌ responses không phải mảng:`, responses);
-                    continue; // hoặc return
-                }
 
                 responses.forEach((res, i) => {
                     if (res.status === 'fulfilled' && res.value?.header_image) {
@@ -96,15 +86,21 @@ function HomePages() {
             }
 
             setSections(result);
+
+            const docRef = doc(db, "gameLists", "categories");
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                setAllCategoryKeys(Object.keys(docSnap.data()));
+            }
         }
 
-        loadGames();
+        loadAll();
     }, []);
 
     const handlePageChange = (key, direction) => {
         setSections(prev => {
             const section = prev[key];
-            const totalPages = Math.ceil(section.data.length / gamepage);
+            const totalPages = Math.ceil(section.data.length / gamePerPage);
             let newPage = section.page + direction;
 
             if (newPage < 0) newPage = totalPages - 1;
@@ -119,10 +115,26 @@ function HomePages() {
 
     return (
         <div className="home-page">
+            <section className="category-section">
+                <h2 className="section-title">Thể loại Game</h2>
+                <div className="category-list">
+                    {allCategoryKeys.map(cat => (
+                        <button
+                            key={cat}
+                            className="category-item"
+                            onClick={() => navigate(`/category/${cat}`)}
+                        >
+                            {titles[cat] || cat.toUpperCase()}
+                        </button>
+                    ))}
+                </div>
+            </section>
+
+            {/* Các phần Game */}
             {Object.entries(sections).map(([key, section]) => {
-                const start = section.page * gamepage;
-                const games = section.data.slice(start, start + gamepage);
-                const totalPages = Math.ceil(section.data.length / gamepage);
+                const start = section.page * gamePerPage;
+                const games = section.data.slice(start, start + gamePerPage);
+                const totalPages = Math.ceil(section.data.length / gamePerPage);
 
                 return (
                     <section key={key} className="game-section-wrapper">
@@ -130,7 +142,7 @@ function HomePages() {
 
                         <div className="carousel-container">
                             <button className="nav-btn left" onClick={() => handlePageChange(key, -1)}>
-                                <div className="arrow left-arrow"></div>
+                                <div className="arrow left-arrow" />
                             </button>
 
                             <div className="game-list">
@@ -140,14 +152,20 @@ function HomePages() {
                             </div>
 
                             <button className="nav-btn right" onClick={() => handlePageChange(key, 1)}>
-                                <div className="arrow right-arrow"></div>
+                                <div className="arrow right-arrow" />
                             </button>
                         </div>
 
                         <div className="dot-indicators">
                             {Array.from({ length: totalPages }).map((_, i) => (
-                                <span key={i} className={`dot ${i === section.page ? 'active' : ''}`}></span>
+                                <span key={i} className={`dot ${i === section.page ? 'active' : ''}`} />
                             ))}
+                        </div>
+
+                        <div className="section-footer">
+                            <Link to={`/category/${key.toLowerCase()}`} className="see-more-link">
+                                XEM THÊM
+                            </Link>
                         </div>
                     </section>
                 );
