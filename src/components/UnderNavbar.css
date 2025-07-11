@@ -47,29 +47,30 @@
 
 .dropdown-menu {
     position: absolute;
-    top: 120%;
-    left: 0;
-    background-color: #222;
-    border: 1px solid #444;
+    background-color: #1a1a1a;
+    border: 1px solid #00bfff;
+    max-height: 300px;
+    /* ✅ giới hạn chiều cao */
+    overflow-y: auto;
+    /* ✅ bật thanh cuộn khi cần */
+    z-index: 999;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     border-radius: 6px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    padding: 10px 0;
-    z-index: 100;
-    min-width: 180px;
+    width: 200px;
 }
 
 .dropdown-item {
     display: block;
-    padding: 8px 16px;
-    color: #ddd;
-    font-size: 14px;
+    padding: 8px 12px;
+    color: white;
     text-decoration: none;
-    transition: background 0.2s;
+    transition: background-color 0.2s ease;
 }
 
 .dropdown-item:hover {
-    background-color: #333;
-    color: #00bfff;
+    background-color: #00bfff;
+    color: black;
 }
 
 /* Search */

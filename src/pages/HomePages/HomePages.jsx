@@ -115,20 +115,7 @@ function HomePages() {
 
     return (
         <div className="home-page">
-            <section className="category-section">
-                <h2 className="section-title">Thể loại Game</h2>
-                <div className="category-list">
-                    {allCategoryKeys.map(cat => (
-                        <button
-                            key={cat}
-                            className="category-item"
-                            onClick={() => navigate(`/category/${cat}`)}
-                        >
-                            {titles[cat] || cat.toUpperCase()}
-                        </button>
-                    ))}
-                </div>
-            </section>
+
 
             {/* Các phần Game */}
             {Object.entries(sections).map(([key, section]) => {
