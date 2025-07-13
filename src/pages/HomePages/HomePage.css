@@ -1,0 +1,120 @@
+.home-page {
+    padding: 40px;
+    background-color: #0f0f0f;
+    color: #fff;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.game-section-wrapper {
+    margin-bottom: 60px;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.game-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex: 1;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.nav-btn {
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    border: solid #ccc;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 6px;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.left .arrow {
+    transform: rotate(135deg);
+}
+
+.right .arrow {
+    transform: rotate(-45deg);
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.dot-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #888;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background-color: #fff;
+}
+
+.category-section {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.category-item {
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #333;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-item:hover {
+    background-color: #00bfff;
+    color: black;
+}
+
+.see-more-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #00bfff;
+    text-decoration: underline;
+}

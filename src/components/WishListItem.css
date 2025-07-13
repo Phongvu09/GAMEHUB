@@ -1,0 +1,27 @@
+.wishlist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background-color: #1a1a1a;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.wishlist-img {
+    width: 180px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.wishlist-info {
+    flex: 1;
+}
+
+.wishlist-info h3 {
+    color: #00bfff;
+    margin-bottom: 10px;
+}

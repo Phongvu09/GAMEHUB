@@ -1,0 +1,106 @@
+.category-page {
+    padding: 30px 5vw;
+    background-color: #0f0f0f;
+    min-height: 100vh;
+    color: white;
+}
+
+.category-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #00bfff;
+}
+
+/* ======= CATEGORYCARD SECTION ======= */
+.highlight-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 50px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s ease;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    border: solid #00bfff;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 6px;
+}
+
+.left-arrow {
+    transform: rotate(135deg);
+}
+
+.right-arrow {
+    transform: rotate(-45deg);
+}
+
+.category-indicator-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.category-dot-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.category-dot-indicator .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #888;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.category-dot-indicator .dot.active {
+    background-color: #00bfff;
+    width: 14px;
+    height: 14px;
+}
+
+.timer-text {
+    color: #ccc;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* ======= DANH SÁCH GAME BÊN DƯỚI ======= */
+
+.game-list-single-line {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin: 40px 0;
+    flex-wrap: nowrap;
+}
+
+/* Responsive chỉnh 1 thẻ khi màn nhỏ */
+@media (max-width: 768px) {
+    .game-list-single-line {
+        flex-direction: column;
+        align-items: center;
+    }
+}
