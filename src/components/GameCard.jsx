@@ -11,21 +11,6 @@ function GameCard({ game }) {
     const navigate = useNavigate();
     const trailer = game.movies?.[0];
 
-    const addToWishlist = () => {
-        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        const exists = wishlist.find(item => item.id === game.id);
-        if (!exists) {
-            wishlist.push({
-                id: game.id || game.steam_appid,
-                name: game.name,
-                header_image: game.header_image
-            });
-            localStorage.setItem('wishlist', JSON.stringify(wishlist));
-            alert("Đã thêm vào Wishlist");
-        } else {
-            alert("Game đã có trong Wishlist");
-        }
-    };
 
 
     useEffect(() => {
