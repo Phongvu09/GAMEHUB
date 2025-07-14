@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchSteamGame } from '../../service/api.js';
-import '../WishListPage/WishlistPage.css'
+import '../WishListPage/WishListPage.css'
 
 export default function WishlistPage() {
     const [games, setGames] = useState([]);
