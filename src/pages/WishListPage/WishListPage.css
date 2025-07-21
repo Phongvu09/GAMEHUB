@@ -21,6 +21,12 @@
     padding: 16px;
     margin-bottom: 20px;
     gap: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.wishlist-item:hover {
+    background-color: #222;
 }
 
 .wishlist-img {
@@ -43,4 +49,44 @@
     margin: 4px 0;
     font-size: 15px;
     color: #ccc;
+}
+
+/* Nút Xóa từng game */
+.remove-btn {
+    margin-top: 10px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.remove-btn:hover {
+    background-color: #ff1f1f;
+}
+
+/* Khu vực chứa nút xóa toàn bộ */
+.wishlist-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Nút xóa toàn bộ */
+.clear-btn {
+    background-color: #aa0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.clear-btn:hover {
+    background-color: #cc0000;
 }

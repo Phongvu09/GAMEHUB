@@ -1,56 +1,73 @@
 import { useEffect, useState } from 'react';
-import { fetchSteamGame } from '../../service/api.js';
-import '../WishListPage/WishListPage.css'
+import { useNavigate } from 'react-router-dom';
+import './WishListPage.css';
 
 export default function WishlistPage() {
     const [games, setGames] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const loadWishlist = async () => {
-            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-
-            const results = await Promise.allSettled(
-                wishlist.map(id => fetchSteamGame(id))
-            );
-
-            const loadedGames = results
-                .filter(res => res.status === 'fulfilled')
-                .map((res, index) => ({
-                    ...res.value,
-                    id: wishlist[index],
-                }));
-
-            setGames(loadedGames);
-        };
-
-        loadWishlist();
+        const stored = JSON.parse(localStorage.getItem('wishlist')) || [];
+        setGames(stored);
     }, []);
 
+    const removeFromWishlist = (id) => {
+        const updated = games.filter(game => game.id !== id);
+        setGames(updated);
+        localStorage.setItem('wishlist', JSON.stringify(updated));
+    };
+
+    const clearWishlist = () => {
+        setGames([]);
+        localStorage.removeItem('wishlist');
+    };
+
     if (games.length === 0) {
-        return <div className="wishlist-page">💔 Danh sách yêu thích đang trống.</div>;
+        return (
+            <div className="wishlist-page">
+                <h2>💔 Danh sách yêu thích đang trống.</h2>
+            </div>
+        );
     }
 
     return (
         <div className="wishlist-page">
-            <h1>Your Wish List</h1>
-            {games.map(game => (
-                <div key={game.id} className="wishlist-item">
-                    <img
-                        src={game.header_image}
-                        alt={game.name}
-                        className="wishlist-img"
-                    />
-                    <div className="wishlist-info">
-                        <h3>{game.name}</h3>
-                        <p><strong>Giá:</strong> {game.price_overview?.final_formatted || 'Miễn phí'}</p>
-                        <p><strong>Hệ điều hành:</strong> {game.platforms && Object.entries(game.platforms)
-                            .filter(([_, supported]) => supported)
-                            .map(([os]) => os.toUpperCase())
-                            .join(', ')}</p>
-                        <p><strong>Thể loại:</strong> {game.genres?.map(g => g.description).join(', ')}</p>
+            <h1>🧡 Danh sách yêu thích</h1>
+
+            <div className="wishlist-list">
+                {games.map(game => (
+                    <div
+                        key={game.id}
+                        className="wishlist-item"
+                        onClick={() => navigate(`/game/${game.id}`)}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <img src={game.image} alt={game.name} className="wishlist-img" />
+                        <div className="wishlist-info">
+                            <h3>{game.name}</h3>
+                            <p><strong>Giá:</strong> {game.price}</p>
+                            <p><strong>Hệ điều hành:</strong> {game.platforms && Object.entries(game.platforms)
+                                .filter(([_, supported]) => supported)
+                                .map(([os]) => os.toUpperCase())
+                                .join(', ')}</p>
+                            <p><strong>Thể loại:</strong> {game.genres?.map(g => g.description).join(', ')}</p>
+                            <button
+                                className="remove-btn"
+                                onClick={(e) => {
+                                    e.stopPropagation(); // ngăn chuyển trang
+                                    removeFromWishlist(game.id);
+                                }}
+                            >
+                                🗑️ Xóa
+                            </button>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
+
+            <div className="wishlist-actions">
+                <button className="clear-btn" onClick={clearWishlist}>Xóa toàn bộ</button>
+            </div>
         </div>
     );
 }
