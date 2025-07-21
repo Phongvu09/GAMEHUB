@@ -1,0 +1,45 @@
+src/
+│
+├── ADMIN/                          # Toàn bộ phần dành cho admin
+│   ├── components/                 # Các component dùng riêng cho admin
+│   │   ├── Sidebar.jsx             # Thanh menu dọc bên trái
+│   │   ├── Header.jsx              # Thanh header phía trên
+│   │   └── AdminCard.jsx           # Card thống kê / widget
+│   │
+│   ├── pages/                      # Các trang quản lý trong admin
+│   │   ├── DashboardPage.jsx       # Trang tổng quan admin
+│   │   ├── OrdersPage.jsx          # Trang quản lý đơn hàng
+│   │   ├── GamesPage.jsx           # Trang quản lý game
+│   │   ├── RevenuePage.jsx         # Trang thống kê doanh thu
+│   │   └── UsersPage.jsx           # Trang quản lý người dùng
+│   │
+│   ├── AdminApp.jsx                # Entry point riêng cho admin (router nội bộ)
+│   └── admin.css                   # CSS layout dành riêng cho admin
+│
+├── components/                     # Component chia sẻ cho phần user (game UI)
+│   ├── Navbar.jsx                  # Thanh điều hướng chính
+│   ├── GameCard.jsx                # Thẻ hiển thị game
+│   ├── UnderNavbar.jsx             # Thanh thể loại / danh mục
+│   └── ...                         # Có thể có thêm Button.jsx, Loader.jsx, ...
+│
+├── pages/                          # Các trang giao diện người dùng
+│   ├── HomePage.jsx                # Trang chủ
+│   ├── GameDetailPage.jsx          # Trang chi tiết game
+│   ├── LoginPage.jsx               # Đăng nhập
+│   ├── RegisterPage.jsx            # Đăng ký
+│   ├── WishlistPage.jsx            # Danh sách yêu thích
+│   ├── CategoriesPage.jsx          # Danh mục game
+│   ├── ProfilePage.jsx             # Trang hồ sơ cá nhân
+│   └── ...                         # Có thể mở rộng thêm SettingsPage.jsx, ...
+│
+│
+├── firebase/                       # Firebase setup và utils
+│    └── firebase.js                 # Cấu hình kết nối Firebase
+│
+├── service/                        # Gọi API bên ngoài hoặc backend riêng
+│   └── api.js    api.js                    # fetch dữ liệu từ Steam, backend, Firestore, ...
+│
+├── App.jsx                         # Entry point chính cho client (user UI + route /admin)
+├── main.jsx                        # File render ReactDOM
+├── index.js                        # Có thể là entry gốc / khởi tạo global styles
+└── index.css                       # CSS tổng thể

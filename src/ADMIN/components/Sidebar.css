@@ -1,0 +1,56 @@
+.admin-sidebar {
+    width: 240px;
+    background-color: #1c1c1c;
+    color: white;
+    padding: 10px;
+    transition: width 0.3s;
+    height: 100vh;
+}
+
+.admin-sidebar.collapsed {
+    width: 60px;
+}
+
+.admin-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.admin-sidebar-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.admin-nav-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.admin-nav-list li {
+    margin-bottom: 12px;
+}
+
+.admin-nav-list li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.2s;
+    padding: 5px 10px;
+    display: block;
+}
+
+.admin-nav-list li a.active-link,
+.admin-nav-list li a:hover {
+    background-color: #333;
+    border-radius: 6px;
+}

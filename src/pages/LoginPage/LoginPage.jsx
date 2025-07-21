@@ -43,7 +43,7 @@ export default function LoginPage() {
 
     return (
         <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="login-container">
-            <h2>🔐 Đăng nhập</h2>
+            <h2>Đăng nhập</h2>
             <input
                 type="email"
                 placeholder="Email"
@@ -58,7 +58,7 @@ export default function LoginPage() {
             />
             <button type="submit">Đăng nhập</button>
             <p style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
-                ❓ Chưa có tài khoản? <a href="/register">Tạo tài khoản mới</a>
+                Chưa có tài khoản? <a href="/register">Tạo tài khoản mới</a>
             </p>
         </form>
     );

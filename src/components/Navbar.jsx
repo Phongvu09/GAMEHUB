@@ -65,7 +65,7 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="navbar-top">
                 <div className="navbar-logo" onClick={() => navigate('/')}>
-                    <img src="/Neon GameHub Logo Design.png" alt="GameHub Logo" />
+                    <img src="NeonGameHubLogo.png" alt="GameHub Logo" />
                 </div>
 
 
