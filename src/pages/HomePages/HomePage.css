@@ -118,3 +118,23 @@
     color: #00bfff;
     text-decoration: underline;
 }
+
+.section-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    padding-right: 10px;
+}
+
+.see-more-link {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-size: 15px;
+}
+
+.see-more-link:hover {
+    color: #1ecfff;
+    text-decoration: underline;
+}

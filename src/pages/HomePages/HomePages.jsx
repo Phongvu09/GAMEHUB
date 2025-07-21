@@ -150,10 +150,14 @@ function HomePages() {
                         </div>
 
                         <div className="section-footer">
-                            <Link to={`/category/${key.toLowerCase()}`} className="see-more-link">
-                                XEM THÊM
+                            <Link
+                                to={`/category/${key.toLowerCase()}`}
+                                className="see-more-link"
+                            >
+                                Xem tất cả →
                             </Link>
                         </div>
+
                     </section>
                 );
             })}
