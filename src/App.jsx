@@ -86,6 +86,7 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import CategoriesPage from './pages/CategoriesPage/CategoriesPage';
 import WishListPage from './pages/WishListPage/WishListPage';
 import AboutPage from './pages/AboutPage/AboutPage';
+import SupportPage from './pages/SupportPage/SupportPage';
 
 import AdminApp from './ADMIN/AdminApp'; // 
 
@@ -131,6 +132,8 @@ function App() {
                 <Route path="/category/:categoryName" element={<CategoriesPage />} />
                 <Route path="/wishlist" element={<WishListPage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/support" element={<SupportPage />} />
+
 
               </Routes>
             </LayoutWrapper>
