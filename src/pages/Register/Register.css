@@ -36,3 +36,8 @@
 .register-container button:hover {
     background-color: #009acd;
 }
+
+.register-container h2 {
+    color: white;
+    text-align: center;
+}

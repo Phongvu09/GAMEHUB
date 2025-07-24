@@ -87,7 +87,7 @@ export default function DashboardPage() {
                 </div>
             </div>
 
-            <h3 className="category-title">📦 Category Statistics</h3>
+            <h3 className="category-title">Category Statistics</h3>
             <div className="category-stats">
                 {categoryStats.map((cat) => (
                     <div key={cat.name} className="stat-box">

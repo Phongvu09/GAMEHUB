@@ -113,8 +113,8 @@ function GameDetailPage() {
                     <p><strong>Metacritic:</strong> {metacritic?.score || 'Không có'}</p>
 
                     <div className="btn-group">
-                        <button className="btn add" onClick={addToCart}>🛒 Thêm vào giỏ</button>
-                        <button className="btn buy" onClick={buyNow}>💳 Mua ngay</button>
+                        <button className="btn add" onClick={addToCart}>Thêm vào giỏ</button>
+                        <button className="btn buy" onClick={buyNow}>Mua ngay</button>
                     </div>
                 </div>
             </div>

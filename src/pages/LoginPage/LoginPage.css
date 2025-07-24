@@ -48,3 +48,8 @@
 .login-container a:hover {
     text-decoration: underline;
 }
+
+.login-container h2 {
+    color: white;
+    text-align: center;
+}

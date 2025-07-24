@@ -12,6 +12,7 @@ export default function UsersPage() {
             const userList = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
+                createdAt: doc.data().createdAt?.toDate?.() || null,
             }));
             setUsers(userList);
         };
@@ -38,7 +39,7 @@ export default function UsersPage() {
                             <tr key={user.id || index}>
                                 <td>{user.username || "Chưa có"}</td>
                                 <td>{user.email}</td>
-                                <td className="capitalize">{user.role || "người mua"}</td>
+                                <td className="capitalize">{user.role || "Người mua"}</td>
                                 <td>
                                     {user.createdAt
                                         ? new Date(user.createdAt).toLocaleDateString()

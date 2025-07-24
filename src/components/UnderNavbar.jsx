@@ -145,14 +145,6 @@ export default function UnderNavbar() {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <button
-                        className="search-button"
-                        onClick={() => {
-                            if (suggestions.length > 0) handleSelect(suggestions[0]);
-                        }}
-                    >
-                        🔍
-                    </button>
                 </div>
 
                 {suggestions.length > 0 && (
