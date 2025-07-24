@@ -39,6 +39,9 @@ function GameCard({ game }) {
                 id: game.id,
                 name: game.name,
                 image: game.header_image,
+                genres: game.genres,
+                platforms: game.platforms,
+                price: game.price_overview?.final_formatted || 'Miễn phí',
             });
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
             setIsWishlisted(true);
@@ -47,6 +50,7 @@ function GameCard({ game }) {
             alert('✅ Game đã có trong danh sách yêu thích');
         }
     };
+
 
     return (
         <div

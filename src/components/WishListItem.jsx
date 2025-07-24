@@ -7,7 +7,7 @@ function WishlistItem({ game }) {
         linux: '🐧',
     };
 
-    const supportedOS = game.platforms || {}; // Ví dụ: { windows: true, mac: false, linux: true }
+    const supportedOS = game.platforms || {};
 
     return (
         <div className="wishlist-item">
