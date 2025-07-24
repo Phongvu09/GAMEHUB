@@ -1,18 +1,55 @@
-/* Revenue box */
-.admin-revenue-box {
-    background-color: #c7f5c7;
-    border: 1px solid #9be29b;
-    color: #14532d;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    font-size: 24px;
+.revenue-page {
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f6;
+    color: #2c3e50;
+}
+
+.revenue-page h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.total-revenue {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.text-highlight {
+    color: #e74c3c;
     font-weight: bold;
 }
 
-/* Subtitle */
-.admin-subtitle {
-    font-size: 20px;
+.admin-table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+    background-color: #f0f0f3;
+    color: #333;
     font-weight: 600;
-    margin-bottom: 12px;
+}
+
+.no-data {
+    text-align: center;
+    padding: 20px 0;
+    color: #888;
+    font-style: italic;
 }

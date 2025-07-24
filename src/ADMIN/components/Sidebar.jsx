@@ -24,7 +24,7 @@ export default function AdminSidebar() {
                 <button className="sidebar-toggle" onClick={toggleSidebar}>
                     ☰
                 </button>
-                {isOpen && <div className="admin-sidebar-title">📊 Bảng Điều Khiển</div>}
+                {isOpen && <div className="admin-sidebar-title">Bảng Điều Khiển</div>}
             </div>
             {isOpen && (
                 <ul className="admin-nav-list">

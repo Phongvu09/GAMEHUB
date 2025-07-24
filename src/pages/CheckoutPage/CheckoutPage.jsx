@@ -1,9 +1,19 @@
 import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { db } from '../../firebase';
+import {
+    collection,
+    addDoc,
+    serverTimestamp,
+    doc,
+    getDoc,
+} from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 import './CheckoutPage.css';
 
-const stripePromise = loadStripe('pk_test_...')
+const stripePromise = loadStripe('pk_test_...'); // Replace with your real publishable key
 
 const cleanPrice = (priceStr) => {
     const numStr = priceStr.replace(/[^0-9.]/g, '');
@@ -12,17 +22,47 @@ const cleanPrice = (priceStr) => {
 };
 
 function CheckoutPage() {
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState([]);
     const [paymentMethod, setPaymentMethod] = useState('credit_card');
-    const [message, setMessage] = useState(' ')
-    const stripe = useStripe()
-    const elements = useElements()
+    const [message, setMessage] = useState('');
+    const [user, setUser] = useState(null);
+    const [userData, setUserData] = useState(null);
 
-
+    const stripe = useStripe();
+    const elements = useElements();
 
     useEffect(() => {
         const stored = JSON.parse(localStorage.getItem('cart')) || [];
         setCart(stored);
+    }, []);
+
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (!currentUser) {
+                alert("Bạn cần đăng nhập để thanh toán!");
+                setTimeout(() => {
+                    window.location.href = "/login";
+                }, 2000);
+            } else {
+                setUser(currentUser);
+
+                // 🔥 LẤY DỮ LIỆU TỪ FIRESTORE
+                try {
+                    const docRef = doc(db, "users", currentUser.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        setUserData(docSnap.data());
+                    } else {
+                        console.warn("Không tìm thấy user trong Firestore.");
+                    }
+                } catch (err) {
+                    console.error("Lỗi khi lấy user từ Firestore:", err);
+                }
+            }
+        });
+
+        return () => unsubscribe();
     }, []);
 
     const getTotal = () => {
@@ -31,38 +71,69 @@ function CheckoutPage() {
     };
 
     const completeOrder = async () => {
-        if (cart.length === 0) {
-            alert("Giỏ hàng đang trống.");
-            return
+        if (!user) {
+            alert("Vui lòng đăng nhập để thực hiện thanh toán.");
+            return;
         }
 
-        if (paymentMethod == "Stripe") {
+        if (cart.length === 0) {
+            alert("Giỏ hàng đang trống.");
+            return;
+        }
+
+        let paymentSuccess = false;
+        let stripePMId = null;
+
+        if (paymentMethod === "Stripe") {
             if (!stripe || !elements) {
-                alert("Stripe chưa sẵn sàng")
-                return
+                alert("Stripe chưa sẵn sàng");
+                return;
             }
 
-            const card = elements.getElement(CardElement)
+            const card = elements.getElement(CardElement);
             const { error, paymentMethod: stripePM } = await stripe.createPaymentMethod({
                 type: 'card',
                 card,
-            })
+            });
 
             if (error) {
-                setMessage(`Lỗi: ${error.message}`)
-                return
+                setMessage(`Lỗi: ${error.message}`);
+                return;
             }
 
-            setMessage(`Thanh toán thành công! ID : ${stripePM.id}`)
+            paymentSuccess = true;
+            stripePMId = stripePM.id;
+            setMessage(`Thanh toán thành công! ID: ${stripePMId}`);
         } else {
-            alert(`Thanh toán thành công bằng phương thức: ${paymentMethod}\nTổng tiền: $${getTotal()}`)
+            paymentSuccess = true;
+            alert(`Thanh toán thành công bằng phương thức: ${paymentMethod}\nTổng tiền: $${getTotal()}`);
         }
 
-        localStorage.removeItem('cart')
-        setCart([])
-        setTimeout(() => {
-            window.location.href = `/`
-        }, 2000)
+        if (paymentSuccess) {
+            try {
+                await addDoc(collection(db, 'orders'), {
+                    cart,
+                    total: parseFloat(getTotal()),
+                    paymentMethod,
+                    paymentId: stripePMId || null,
+                    createdAt: serverTimestamp(),
+                    buyer: {
+                        name: userData?.username || "Không rõ",
+                        email: user?.email || "Không rõ",
+                    },
+                });
+            } catch (err) {
+                console.error("Lỗi khi lưu đơn hàng:", err);
+                setMessage("Thanh toán thành công nhưng không thể lưu đơn hàng.");
+                return;
+            }
+
+            localStorage.removeItem('cart');
+            setCart([]);
+            setTimeout(() => {
+                window.location.href = `/`;
+            }, 2000);
+        }
     };
 
     return (
@@ -85,7 +156,7 @@ function CheckoutPage() {
                         ))}
                     </ul>
 
-                    <div className="checkout-total">++
+                    <div className="checkout-total">
                         <p><strong>Tổng tiền:</strong> ${getTotal()}</p>
                     </div>
 
@@ -142,7 +213,6 @@ function CheckoutPage() {
                                 {message && <p style={{ marginTop: '10px' }}>{message}</p>}
                             </div>
                         )}
-
                     </div>
 
                     <button className="complete-btn" onClick={completeOrder}>
@@ -153,7 +223,6 @@ function CheckoutPage() {
         </div>
     );
 }
-
 
 export default function WrappedCheckoutPage() {
     return (

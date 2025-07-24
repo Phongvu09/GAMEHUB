@@ -21,7 +21,7 @@ export default function UsersPage() {
 
     return (
         <div className="admin-page">
-            <h2 className="admin-title">👥 Quản lý người dùng</h2>
+            <h2 className="admin-title">Quản lý người dùng</h2>
 
             <div className="admin-table-wrapper">
                 <table className="admin-table">

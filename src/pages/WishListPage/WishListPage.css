@@ -6,10 +6,17 @@
 }
 
 .wishlist-page h1 {
-    color: #00bfff;
+    color: white;
     font-size: 2.2rem;
     margin-bottom: 30px;
-    text-align: center;
+
+}
+
+.wishlist-page h2 {
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+
 }
 
 .wishlist-item {

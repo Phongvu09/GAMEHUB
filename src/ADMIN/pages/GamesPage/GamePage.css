@@ -1,60 +1,39 @@
-.admin-page {
-    padding: 30px;
-    background-color: #121212;
-    color: #fff;
-    min-height: 100vh;
+.game-page {
+    padding: 24px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9fafb;
+    color: #1f2937;
 }
 
-.admin-title {
-    font-size: 26px;
-    font-weight: 600;
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
     margin-bottom: 20px;
 }
 
-.admin-table-wrapper {
-    overflow-x: auto;
+.category-block {
+    margin-bottom: 32px;
 }
 
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    overflow: hidden;
+.category-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
 }
 
-.admin-table th,
-.admin-table td {
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid #2d2d2d;
-}
+/* .game-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+} */
 
-.admin-table th {
-    background-color: #2c2c2c;
-    color: #00bfff;
-}
-
-.admin-table tr:hover {
-    background-color: #1a1a1a;
-}
-
-.btn-delete {
-    background-color: #e74c3c;
-    color: white;
-    padding: 6px 14px;
+.game-row {
+    padding: 12px;
+    border: 1px solid #e5e7eb;
     border-radius: 6px;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.2s;
+    background-color: #fff;
 }
 
-.btn-delete:hover {
-    background-color: #c0392b;
-}
-
-.no-data {
-    text-align: center;
-    padding: 20px;
-    color: #aaa;
+.game-row p {
+    margin: 4px 0;
 }

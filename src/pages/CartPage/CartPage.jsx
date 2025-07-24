@@ -33,7 +33,7 @@ function CartPage() {
             <h1>Giỏ Hàng</h1>
 
             {cart.length === 0 ? (
-                <p>Giỏ hàng đang trống.</p>
+                <p className='cart'>Giỏ hàng đang trống</p>
             ) : (
                 <>
                     <ul className="cart-list">

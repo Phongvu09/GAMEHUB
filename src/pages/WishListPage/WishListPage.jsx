@@ -25,14 +25,14 @@ export default function WishlistPage() {
     if (games.length === 0) {
         return (
             <div className="wishlist-page">
-                <h2>💔 Danh sách yêu thích đang trống.</h2>
+                <h2>Danh sách yêu thích đang trống</h2>
             </div>
         );
     }
 
     return (
         <div className="wishlist-page">
-            <h1>🧡 Danh sách yêu thích</h1>
+            <h1>Danh sách yêu thích</h1>
 
             <div className="wishlist-list">
                 {games.map(game => (
@@ -54,11 +54,11 @@ export default function WishlistPage() {
                             <button
                                 className="remove-btn"
                                 onClick={(e) => {
-                                    e.stopPropagation(); // ngăn chuyển trang
+                                    e.stopPropagation();
                                     removeFromWishlist(game.id);
                                 }}
                             >
-                                🗑️ Xóa
+                                Xóa
                             </button>
                         </div>
                     </div>

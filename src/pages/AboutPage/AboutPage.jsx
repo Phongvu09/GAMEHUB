@@ -10,7 +10,7 @@ export default function About() {
                         GameHub là nền tảng kết nối cộng đồng game thủ Việt, nơi bạn có thể khám phá, tìm hiểu và chia sẻ về những tựa game hot nhất hiện nay.
                         Chúng tôi tổng hợp dữ liệu trực tiếp từ Steam để mang đến thông tin nhanh chóng, chính xác và đa dạng.
                     </p>
-                    <p className="about-text">
+                    {/* <p className="about-text">
                         Website được xây dựng bằng ReactJS và Firebase, với giao diện hiện đại, dễ sử dụng, phù hợp với cả game thủ mới và kỳ cựu.
                     </p>
                     <p className="about-text">
@@ -19,7 +19,7 @@ export default function About() {
                     <p className="about-text">
                         Cảm ơn bạn đã ghé thăm GameHub! Nếu có góp ý, hãy liên hệ với chúng tôi qua email:
                         <a href="mailto:gamehub.team@gmail.com" className="about-link">gamehub.team@gmail.com</a>
-                    </p>
+                    </p> */}
                 </div>
 
                 <div className="about-video-section">

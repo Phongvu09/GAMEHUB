@@ -2,12 +2,17 @@
     padding: 24px;
     background-color: #f3f4f6;
     min-height: 100vh;
+    color: #1f2937;
+    /* text-gray-800 */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .admin-title {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 24px;
+    color: #111827;
+    /* text-gray-900 */
 }
 
 .admin-table-wrapper {
@@ -20,25 +25,40 @@
 .admin-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 16px;
+    /* tăng kích thước */
 }
 
 .admin-table th,
 .admin-table td {
     padding: 16px;
     text-align: left;
+    color: #111827;
+    /* text-gray-900 */
+    font-weight: 500;
 }
 
 .admin-table thead {
-    background-color: #e5e7eb;
-    font-weight: 600;
+    background-color: #d1d5db;
+    /* gray-300 */
+    color: #111827;
+    font-weight: 700;
 }
 
 .admin-table tbody tr {
     border-top: 1px solid #e5e7eb;
 }
 
+.admin-table tbody tr:hover {
+    background-color: #f9fafb;
+    /* hover background */
+}
+
 .no-data {
     text-align: center;
     padding: 20px;
     color: #6b7280;
+    /* gray-500 */
+    font-style: italic;
+    font-size: 15px;
 }
