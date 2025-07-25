@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown } from 'antd';
 import { auth, db } from '../firebase.js';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -23,37 +23,30 @@ export default function Navbar() {
     };
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            console.log('📌 User onAuthStateChanged:', user);
+        let unsubscribeUser = null;
+
+        const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
             if (user) {
-                try {
-                    const userDocRef = doc(db, 'users', user.uid);
-                    const userDocSnap = await getDoc(userDocRef);
-                    if (userDocSnap.exists()) {
-                        const data = userDocSnap.data();
+                const userDocRef = doc(db, 'users', user.uid);
+                unsubscribeUser = onSnapshot(userDocRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
                         setUsername(data.username);
                     } else {
                         setUsername(null);
                     }
-                } catch (error) {
-                    setUsername(null);
-                }
+                });
             } else {
                 setUsername(null);
+                if (unsubscribeUser) unsubscribeUser();
             }
         });
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribeAuth();
+            if (unsubscribeUser) unsubscribeUser();
+        };
     }, []);
-
-    const handleSearch = (e) => {
-        e.preventDefault();
-        if (searchTerm.trim() !== '') {
-            navigate(`/search?query=${encodeURIComponent(searchTerm.trim())}`);
-            setSearchTerm('');
-        }
-    };
-
 
     const handleLogout = async () => {
         await signOut(auth);
@@ -67,8 +60,6 @@ export default function Navbar() {
                 <div className="navbar-logo" onClick={() => navigate('/')}>
                     <img src="NeonGameHubLogo.png" alt="GameHub Logo" />
                 </div>
-
-
 
                 <div className="navbar-links-right">
                     {!username ? (
@@ -95,15 +86,13 @@ export default function Navbar() {
                             <span
                                 className="nav-user"
                                 onClick={() => navigate('/profile')}
-                                title="Go to Profile"
+                                title="Trang cá nhân"
                             >
                                 👤 {username}
                             </span>
                             <button onClick={handleLogout} className="logout-btn">Logout</button>
                         </>
                     )}
-
-
 
                     <Dropdown
                         trigger={['click']}
