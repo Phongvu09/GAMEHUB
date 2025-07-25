@@ -83,8 +83,15 @@ function GameDetailPage() {
     };
 
     const buyNow = () => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const exists = cart.find(item => item.id === id);
+        if (!exists) {
+            cart.push({ id, name, image: header_image, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+        };
         window.location.href = '/cart';
-    };
+
+    }
 
     return (
         <div className="game-detail-page">

@@ -29,7 +29,7 @@ const fetchAPIgames = async (categoriesName = ["best", "cheap", "Hot", "New"]) =
         const field = data[category];
 
         if (!field || typeof field[0] !== "string") {
-            console.warn(`⚠️ Field ${category} không tồn tại hoặc sai định dạng`, field);
+            console.warn(`Field ${category} không tồn tại hoặc sai định dạng`, field);
             continue;
         }
 
@@ -66,7 +66,7 @@ function HomePages() {
                 const responses = await Promise.allSettled(
                     ids.map(id =>
                         fetchSteamGame(id).catch(err => {
-                            console.error(`❌ fetchSteamGame(${id}) lỗi:`, err.message);
+                            console.error(`fetchSteamGame(${id}) lỗi:`, err.message);
                             return null;
                         })
                     )
