@@ -49,7 +49,7 @@ function SupportPage() {
                 <p>Hoặc điền vào biểu mẫu bên dưới:</p>
 
                 {submitted ? (
-                    <p style={{ color: 'lightgreen' }}>✅ Cảm ơn bạn, thông tin đã được gửi!</p>
+                    <p style={{ color: 'lightgreen' }}>Cảm ơn bạn, thông tin đã được gửi!</p>
                 ) : (
                     <form className="support-form" onSubmit={handleSubmit}>
                         <input

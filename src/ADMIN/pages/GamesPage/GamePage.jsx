@@ -28,7 +28,6 @@ export default function GamePage() {
                     throw new Error('Field "all" không hợp lệ hoặc rỗng');
                 }
 
-                // Lọc và chuyển ID thành số
                 const ids = all
                     .map(id => typeof id === 'string' ? parseInt(id.trim()) : id)
                     .filter(id => typeof id === 'number' && !isNaN(id));
