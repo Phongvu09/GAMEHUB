@@ -12,7 +12,7 @@ export default function AdminSidebar() {
         { to: '/admin/users', label: 'Quản lý người dùng' },
         { to: '/admin/revenue', label: 'Doanh thu' },
         { to: '/admin/orders', label: 'Đơn hàng' },
-        { to: '/admin/support-feedbacks', label: 'Support' },
+        { to: '/admin/support-feedbacks', label: 'Hỗ trợ' },
     ];
 
     const toggleSidebar = () => {
