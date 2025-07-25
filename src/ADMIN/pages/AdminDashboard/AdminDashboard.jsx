@@ -23,7 +23,6 @@ export default function DashboardPage() {
                 });
                 setTotalRevenue(total);
 
-                // Lấy dữ liệu từ document categories
                 const categorySnap = await getDoc(doc(db, "gameLists", "categories"));
                 if (categorySnap.exists()) {
                     const data = categorySnap.data();

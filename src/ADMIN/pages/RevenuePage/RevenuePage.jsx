@@ -11,26 +11,31 @@ export default function RevenuePage() {
         const fetchOrders = async () => {
             const ordersSnap = await getDocs(collection(db, "orders"));
             const data = ordersSnap.docs.map((doc) => {
-                const order = doc.data();
-                const createdAt = order.createdAt?.toDate?.()
-                    ? order.createdAt.toDate()
-                    : new Date(order.createdAt || Date.now());
+                const {
+                    createdAt,
+                    cart = [],
+                    total = 0,
+                    paymentMethod = "N/A"
+                } = doc.data();
 
-                const gameNames = (order.cart || []).map(item => item.name || "Không rõ");
+                const safeCreatedAt =
+                    createdAt?.toDate?.() ?? new Date(createdAt || Date.now());
+
+                const gameNames = cart.map(item => item?.name ?? "Không rõ");
 
                 return {
                     id: doc.id,
-                    createdAt,
-                    total: order.total || 0,
-                    paymentMethod: order.paymentMethod || "N/A",
+                    createdAt: safeCreatedAt,
+                    total,
+                    paymentMethod,
                     gameNames,
                 };
             });
 
             setOrders(data);
-            const total = data.reduce((sum, order) => sum + order.total, 0);
-            setTotalRevenue(total);
+            setTotalRevenue(data.reduce((sum, o) => sum + o.total, 0));
         };
+
         fetchOrders();
     }, []);
 
@@ -56,24 +61,25 @@ export default function RevenuePage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order) => (
-                            <tr key={order.id}>
-                                <td>{order.id}</td>
-                                <td>{order.paymentMethod}</td>
-                                <td>{order.createdAt.toLocaleDateString("vi-VN")}</td>
-                                <td>{order.createdAt.toLocaleTimeString("vi-VN", {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                })}</td>
-                                <td>
-                                    <div className="game-names">
-                                        {order.gameNames.join(", ")}
-                                    </div>
-                                </td>
-                                <td className="text-highlight">${order.total.toFixed(2)}</td>
-                            </tr>
-                        ))}
-                        {orders.length === 0 && (
+                        {orders.length > 0 ? (
+                            orders.map((order) => (
+                                <tr key={order.id}>
+                                    <td>{order.id}</td>
+                                    <td>{order.paymentMethod}</td>
+                                    <td>{order.createdAt.toLocaleDateString("vi-VN")}</td>
+                                    <td>{order.createdAt.toLocaleTimeString("vi-VN", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                    })}</td>
+                                    <td>
+                                        <div className="game-names">
+                                            {order.gameNames.join(", ")}
+                                        </div>
+                                    </td>
+                                    <td className="text-highlight">${order.total.toFixed(2)}</td>
+                                </tr>
+                            ))
+                        ) : (
                             <tr>
                                 <td colSpan="6" className="no-data">Không có đơn nào.</td>
                             </tr>
