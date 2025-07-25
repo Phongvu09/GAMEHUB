@@ -67,9 +67,7 @@ export default function RevenuePage() {
                                 })}</td>
                                 <td>
                                     <div className="game-names">
-                                        {order.gameNames.map((name, index) => (
-                                            <span key={index} className="game-tag">{name}</span>
-                                        ))}
+                                        {order.gameNames.join(", ")}
                                     </div>
                                 </td>
                                 <td className="text-highlight">${order.total.toFixed(2)}</td>

@@ -32,7 +32,7 @@ function LayoutWrapper() {
     <>
       <Navbar />
       {showUnderNavbar && <UnderNavbar />}
-      <Outlet /> {/* Đây là chỗ để render các route con */}
+      <Outlet /> { }
     </>
   );
 }
@@ -41,10 +41,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Admin App riêng */}
         <Route path="/admin/*" element={<AdminApp />} />
 
-        {/* Các trang client có layout chung */}
         <Route element={<LayoutWrapper />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />

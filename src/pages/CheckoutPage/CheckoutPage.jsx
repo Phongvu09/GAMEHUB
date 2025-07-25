@@ -47,7 +47,6 @@ function CheckoutPage() {
             } else {
                 setUser(currentUser);
 
-                // 🔥 LẤY DỮ LIỆU TỪ FIRESTORE
                 try {
                     const docRef = doc(db, "users", currentUser.uid);
                     const docSnap = await getDoc(docRef);

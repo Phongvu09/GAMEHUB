@@ -12,11 +12,9 @@ export default function DashboardPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Lấy tổng số user
                 const usersSnap = await getDocs(collection(db, "users"));
                 setUserCount(usersSnap.size);
 
-                // Tính tổng doanh thu
                 const ordersSnap = await getDocs(collection(db, "orders"));
                 let total = 0;
                 ordersSnap.forEach((doc) => {
