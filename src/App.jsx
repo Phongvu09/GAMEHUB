@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import UnderNavbar from './components/UnderNavbar';
+import Footer from './components/Footer';
 
 import HomePage from './pages/HomePages/HomePages';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -33,6 +34,7 @@ function LayoutWrapper() {
       <Navbar />
       {showUnderNavbar && <UnderNavbar />}
       <Outlet /> { }
+      <Footer />
     </>
   );
 }
